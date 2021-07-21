@@ -2,7 +2,7 @@
 <html lang="en">
 
 <head>
-  <title>Hello, world!</title>
+  <title>Staffs</title>
   <!-- Required meta tags -->
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport" />
@@ -24,19 +24,19 @@
   -->
       <div class="logo">
         <a href="http://www.creative-tim.com" class="simple-text logo-normal">
-          Creative Tim
+         CrossFit Gym
         </a>
       </div>
       <div class="sidebar-wrapper">
         <ul class="nav">
           <li class="nav-item   ">
-            <a class="nav-link" href="template.php">
+            <a class="nav-link" href="gymdeshboard.php">
               <i class="material-icons">dashboard</i>
               <p>Dashboard</p>
             </a>
           </li>
           <li class="nav-item ">
-            <a class="nav-link" href="user data.php">
+            <a class="nav-link" href="viewmembers.php">
               <i class="material-icons">person</i>
               <p>Members</p>
             </a>
@@ -59,6 +59,18 @@
               <p>Devices</p>
             </a>
           </li>
+          <li class="nav-item ">
+            <a class="nav-link" href="suppliments.php">
+              <i class="material-icons">reorder</i>
+              <p>Stocks</p>
+            </a>
+          </li>
+          <li class="nav-item ">
+            <a class="nav-link" href="viewsales.php">
+              <i class="material-icons">paid</i>
+              <p>Sales</p>
+            </a>
+          </li>
           <!-- your sidebar here -->
         </ul>
       </div>
@@ -79,10 +91,10 @@
           <div class="collapse navbar-collapse justify-content-end">
             <ul class="navbar-nav">
               <li class="nav-item">
-                <a class="nav-link" href="javascript:void(0)">
-                  <i class="material-icons">notifications</i>
+                <a class="nav-link" href="Logout.php">
+                  <i class="material-icons">logout</i>
                   <p class="d-lg-none d-md-block">
-                    Notifications
+                   logout
                   </p>
                 </a>
               </li>
@@ -136,7 +148,7 @@
                           echo '<td>'.$row[7].' </td>';                       
                           echo '<td><a class="btn btn-success" href="staffedit.php?id='.$row['id'].'">Edit</a>';
                           echo ' ';
-                          echo '<a class="btn btn-danger" href="user data delete page.php?id='.$row['id'].'">Delete</a>';                          
+                          echo '<a class="btn btn-danger" href="staffdelete.php?id='.$row['id'].'">Delete</a>';                          
                           echo '</tr>';
                                 }
                         ?>    
@@ -147,27 +159,7 @@
         </div>
         </div>
       </div>
-      <footer class="footer">
-        <div class="container-fluid">
-          <nav class="float-left">
-            <ul>
-              <li>
-                <a href="https://www.creative-tim.com">
-                  Creative Tim
-                </a>
-              </li>
-            </ul>
-          </nav>
-          <div class="copyright float-right">
-            &copy;
-            <script>
-              document.write(new Date().getFullYear())
-            </script>, made with <i class="material-icons">favorite</i> by
-            <a href="https://www.creative-tim.com" target="_blank">Creative Tim</a> for a better web.
-          </div>
-          <!-- your footer here -->
-        </div>
-      </footer>
+      
     </div>
   </div>
   <!--   Core JS Files   -->

@@ -1,8 +1,14 @@
+<?php
+	include('connectDB.php');
+	$id=$_GET['id'];
+	$query=mysqli_query($conn,"select * from `members` where id='$id'");
+	$data=mysqli_fetch_array($query);
+?>
 <!doctype html>
 <html lang="en">
 
 <head>
-  <title>Add Members</title>
+  <title>Edit Members</title>
   <!-- Required meta tags -->
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport" />
@@ -82,7 +88,7 @@
       <nav class="navbar navbar-expand-lg navbar-transparent navbar-absolute fixed-top ">
         <div class="container-fluid">
           <div class="navbar-wrapper">
-            <a class="navbar-brand" href="javascript:void(0)">Deshboard/Add Members </a>
+            <a class="navbar-brand" href="javascript:void(0)">Deshboard/Edit Members </a>
           </div>
           <button class="navbar-toggler" type="button" data-toggle="collapse" aria-controls="navigation-index" aria-expanded="false" aria-label="Toggle navigation">
             <span class="sr-only">Toggle navigation</span>
@@ -114,7 +120,7 @@
                 <div class="card-header card-header-primary">
                 <div class="row">
                      <div class="col-xl-3 col-md-12">
-                     <h4 >Add Members Information </h4>
+                     <h4 >Edit Members Information</h4>
                      </div>
                      <div class="col-xl-8 col-md-12">
                      <a class="btn btn-success float-right" href="viewmembers.php">View Members</a>
@@ -127,13 +133,13 @@
               <div class="card">
                
               <div class="card-body">
-                  <form id ="addstaff" action="insertmembers.php" method="POST" onsubmit="return validation()">
-                    
+                  <form id ="addstaff" action="editmemberssubmit.php" method="POST">
+                  <input type="hidden" id="id" name="id" class="from-control" value="<?php echo $data['id'];?>">
                     <div class="row">
                     <div class="col-lg-8 col-md-12">
                             <div class="form-group ">
                             <label class="bmd-label-floating"> Name</label>
-                            <input type="text" id="name" name="name" class="form-control" required>
+                            <input type="text" id="name" name="name" class="form-control" required value="<?php echo $data['name'];?>">
                             
                             </div>
                     </div>
@@ -141,14 +147,14 @@
                     <div class="form-group ">
                         <label for="stafftype">Select Plan</label>
                         <select class="form-control " name ="plan" id="plan" required>
-                        <option class="text-dark">Select Plan</option>       
+                        <option selected="selected"><?php echo $data["plan"]; ?></option>       
                                 <?php
                                     include 'connectDB.php';
                                     $sql="SELECT  planname FROM plans";
                                     $result=mysqli_query($conn,$sql);
                                     while($row=mysqli_fetch_array($result))
                                     {
-                                  
+                                        
                                         echo '<option class="text-dark"> '.$row[planname].' </option>';
                                     }
                                 ?>                            
@@ -163,7 +169,7 @@
                           <label class="bmd-label-floating">Phone Number </label>
                           <div class="input-group mb-4 mr-sm-4">
                               
-                          <input type="text" id="phonenumber" name="phonenumber" class="form-control"required>
+                          <input type="text" id="phonenumber" name="phonenumber" class="form-control"required value="<?php echo $data['phonenumber'];?>">
                           
                           </div>
                         </div>
@@ -174,7 +180,7 @@
                         
                         <label for="stafftype">Select  Type</label>
                         <select class="form-control " name ="type" id="type"required>
-                       
+                        <option selected="selected"><?php echo $data["type"]; ?></option>  
                         <option class="text-dark">Gym</option>
                         <option class="text-dark">Yoga</option>
                         </select>                       
@@ -187,7 +193,7 @@
                         <div class="form-group">
                           <label class="bmd-label-floating">Email </label>
                           <div class="input-group mb-4 mr-sm-4">
-                          <input type="email" id="email" name="email" class="form-control"required>
+                          <input type="text" id="email" name="email" class="form-control"required value="<?php echo $data['email'];?>">
                          
                           </div>
                         </div>
@@ -197,6 +203,7 @@
                       <div class="form-group "required>
                         <label for="gender">Gender</label>
                         <select class="form-control " name="gender" id="gender">
+                        <option selected="selected"><?php echo $data["gender"]; ?></option>  
                         <option class="text-dark">Male</option>
                         <option class="text-dark">Female</option>
                         <option class="text-dark">Others</option>
@@ -215,13 +222,13 @@
                     <div class=" col-lg-6 col-md-12">
                             <div class="form-group">
                             <label class="bmd-label-floating">Address</label>
-                            <input type="textarea" id="address" name="address" class="form-control">
+                            <input type="textarea" id="address" name="address" class="form-control" value="<?php echo $data['address'];?>">
                             </div>
                     </div>
                     <div class=" col-lg-6 col-md-12">
                     <div class="form-group mb-3">
                                 <label for="">Date of Start</label>
-                                <input type="date" name="dateofstart" class="form-control" />
+                                <input type="date" name="dateofstart" class="form-control" value="<?php echo $data['dateofstart'];?>" />
                             </div>
                     </div>
                     
@@ -237,29 +244,6 @@
                     
                     
                   </form>
-                  <script>
-                    function validation()
-                    {
-                      var phone = document.forms['addstaff']['phonenumber'];
-                      
-                      if(isNaN(phone.value) || phone.value.length!=10 )
-                      {
-                        alert('Invalid Phone Number');
-                        return false;
-                      }
-                      return true;
-                      function ValidateEmail(email) 
-                      {
-                      if (/^[a-zA-Z0-9.!#$%&'+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)$/.test(addstaff.email.value))
-                        {
-                          return (true);
-                        }
-                          alert("You have entered an invalid email address!");
-                          
-                          return false;
-                      }
-                    }
-                  </script>
                 </div>
               </div>
             </div>
@@ -272,7 +256,27 @@
         </div>
         </div>
       </div>
-      
+      <footer class="footer">
+        <div class="container-fluid">
+          <nav class="float-left">
+            <ul>
+              <li>
+                <a href="https://www.creative-tim.com">
+                  Creative Tim
+                </a>
+              </li>
+            </ul>
+          </nav>
+          <div class="copyright float-right">
+            &copy;
+            <script>
+              document.write(new Date().getFullYear())
+            </script>, made with <i class="material-icons">favorite</i> by
+            <a href="https://www.creative-tim.com" target="_blank">Creative Tim</a> for a better web.
+          </div>
+          <!-- your footer here -->
+        </div>
+      </footer>
     </div>
   </div>
   <!--   Core JS Files   -->

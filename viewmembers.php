@@ -2,7 +2,7 @@
 <html lang="en">
 
 <head>
-  <title>Add Members</title>
+  <title>Members</title>
   <!-- Required meta tags -->
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport" />
@@ -12,8 +12,6 @@
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css">
   <!-- Material Kit CSS -->
   <link href="assets/css/material-dashboard.css?v=2.1.0" rel="stylesheet" />
-  <link href="assets/css/material-dashboard.css"/>
-  <link href="..css/style.css"/>
 </head>
 
 <body class="dark-edition">
@@ -37,7 +35,7 @@
               <p>Dashboard</p>
             </a>
           </li>
-          <li class="nav-item active ">
+          <li class="nav-item active">
             <a class="nav-link" href="viewmembers.php">
               <i class="material-icons">person</i>
               <p>Members</p>
@@ -82,7 +80,7 @@
       <nav class="navbar navbar-expand-lg navbar-transparent navbar-absolute fixed-top ">
         <div class="container-fluid">
           <div class="navbar-wrapper">
-            <a class="navbar-brand" href="javascript:void(0)">Deshboard/Add Members </a>
+            <a class="navbar-brand" href="javascript:void(0)">Deshboard/Members </a>
           </div>
           <button class="navbar-toggler" type="button" data-toggle="collapse" aria-controls="navigation-index" aria-expanded="false" aria-label="Toggle navigation">
             <span class="sr-only">Toggle navigation</span>
@@ -114,158 +112,61 @@
                 <div class="card-header card-header-primary">
                 <div class="row">
                      <div class="col-xl-3 col-md-12">
-                     <h4 >Add Members Information </h4>
+                     <h4 >Members Information</h4>
                      </div>
                      <div class="col-xl-8 col-md-12">
-                     <a class="btn btn-success float-right" href="viewmembers.php">View Members</a>
+                     <a class="btn btn-success float-right" href="addmembers.php">Add Members</a>
                      </div>
                 </div>
                 </div>
-                <div class="card-body table-responsive">
-                <div class="row">
-            <div class="col-md-12">
-              <div class="card">
-               
-              <div class="card-body">
-                  <form id ="addstaff" action="insertmembers.php" method="POST" onsubmit="return validation()">
-                    
-                    <div class="row">
-                    <div class="col-lg-8 col-md-12">
-                            <div class="form-group ">
-                            <label class="bmd-label-floating"> Name</label>
-                            <input type="text" id="name" name="name" class="form-control" required>
-                            
-                            </div>
-                    </div>
-                    <div class="col-lg-4 col-md-12">
-                    <div class="form-group ">
-                        <label for="stafftype">Select Plan</label>
-                        <select class="form-control " name ="plan" id="plan" required>
-                        <option class="text-dark">Select Plan</option>       
-                                <?php
-                                    include 'connectDB.php';
-                                    $sql="SELECT  planname FROM plans";
-                                    $result=mysqli_query($conn,$sql);
-                                    while($row=mysqli_fetch_array($result))
-                                    {
-                                  
-                                        echo '<option class="text-dark"> '.$row[planname].' </option>';
-                                    }
-                                ?>                            
-                                </select>
-                        
-                    </div>
-                    </div>
-                    </div>
-                    <div class="row">
-                      <div class="col-lg-3 col-md-12">
-                        <div class="form-group">
-                          <label class="bmd-label-floating">Phone Number </label>
-                          <div class="input-group mb-4 mr-sm-4">
-                              
-                          <input type="text" id="phonenumber" name="phonenumber" class="form-control"required>
-                          
-                          </div>
-                        </div>
-                      </div>
-
-                      <div class="col-lg-3 col-md-12">
-                        <div class="form-group">
-                        
-                        <label for="stafftype">Select  Type</label>
-                        <select class="form-control " name ="type" id="type"required>
-                       
-                        <option class="text-dark">Gym</option>
-                        <option class="text-dark">Yoga</option>
-                        </select>                       
-                        </div>                        
-                    </div>
-                        
-                      
-                   
-                      <div class="col-lg-3 col-md-12">
-                        <div class="form-group">
-                          <label class="bmd-label-floating">Email </label>
-                          <div class="input-group mb-4 mr-sm-4">
-                          <input type="email" id="email" name="email" class="form-control"required>
-                         
-                          </div>
-                        </div>
-                      </div>
-                    
-                      <div class="col-lg-3 col-md-12">
-                      <div class="form-group "required>
-                        <label for="gender">Gender</label>
-                        <select class="form-control " name="gender" id="gender">
-                        <option class="text-dark">Male</option>
-                        <option class="text-dark">Female</option>
-                        <option class="text-dark">Others</option>
-                        
-                       
-                        </select>
-                       
-                        </div>
-                      </div>
+                <div class="card-body table-responsive text-center" >
+                <table class="table table-hover " >
+                  <thead>
+                    <tr>
+                      <th>Name</th>
+                      <th>Plan </th>
+					            <th>Phone Number</th>
+					            <th>Type</th>
                      
+                      <th >Gender</th>
+                      <th >Address</th>
+                      <th >Date Of Start</br>
+                       (YYYY-MM-DD)
+                      </th>
+                      <th >Date Of End</br>
+                      (YYYY-MM-DD)
+                      </th>
+                      <th> Action</th>
                       
-                      
-                    </div>
-                    
-                    <div class="row">
-                    <div class=" col-lg-6 col-md-12">
-                            <div class="form-group">
-                            <label class="bmd-label-floating">Address</label>
-                            <input type="textarea" id="address" name="address" class="form-control">
-                            </div>
-                    </div>
-                    <div class=" col-lg-6 col-md-12">
-                    <div class="form-group mb-3">
-                                <label for="">Date of Start</label>
-                                <input type="date" name="dateofstart" class="form-control" />
-                            </div>
-                    </div>
-                    
-                  <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js"></script>
-                    </div> 
-                    </div>
-                    
-                 </div>
-                    <button type="submit" name="submit" class="btn btn-secondary pull-right">Cancel </button>
-                    <button type="submit" class="btn btn-primary pull-right">Submit </button>
-                    
-                    
-                    
-                  </form>
-                  <script>
-                    function validation()
-                    {
-                      var phone = document.forms['addstaff']['phonenumber'];
-                      
-                      if(isNaN(phone.value) || phone.value.length!=10 )
-                      {
-                        alert('Invalid Phone Number');
-                        return false;
-                      }
-                      return true;
-                      function ValidateEmail(email) 
-                      {
-                      if (/^[a-zA-Z0-9.!#$%&'+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)$/.test(addstaff.email.value))
+                    </tr>
+                  </thead>
+                  <tbody >
+                        <?php
+                        include 'connectDB.php';
+                        $sql="Select * from members  ORDER BY id DESC";
+                        $result=mysqli_query($conn,$sql)or die( mysqli_error($conn));
+                        while($row=mysqli_fetch_array($result))
                         {
-                          return (true);
-                        }
-                          alert("You have entered an invalid email address!");
                           
-                          return false;
-                      }
-                    }
-                  </script>
-                </div>
-              </div>
-            </div>
-            
-          </div>
-        </div>
+                          echo '<tr>';
+                          echo '<td>'.$row[1].'</td>';
+                          echo '<td>'.$row[2].' </td>'; 
+                          echo '<td>'.$row[3].' </td>'; 
+                          echo '<td>'.$row[4].' </td>';  
+                         
+                          echo '<td>'.$row[6].' </td>'; 
+                          echo '<td>'.$row[7].' </td>'; 
+                          echo '<td>'.$row[8].' </td>';     
+                          echo '<td> '.$row[9].'</td>';                    
+                          echo '<td><a class="btn btn-success" href="editmembers.php?id='.$row['id'].'">Edit</a>';
+                          echo ' ';
+                          echo '<a class="btn btn-danger" href="membersdelete.php?id='.$row['id'].'">Delete</a>'; 
+                          echo ' ';
+                         
+                          echo '</tr>';
+                                }
+                        ?>    
+                      </table>
                 </div>
               </div>
             </div>
@@ -293,7 +194,6 @@
   <script src="./assets/js/material-dashboard.js?v=2.1.0"></script>
   <!-- Material Dashboard DEMO methods, don't include it in your project! -->
   <script src="./assets/demo/demo.js"></script>
- 
   <script>
     $(document).ready(function() {
       $().ready(function() {
@@ -456,7 +356,6 @@
       });
     });
   </script>
-  
 </body>
 
 </html>

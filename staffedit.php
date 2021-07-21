@@ -8,7 +8,7 @@
 <html lang="en">
 
 <head>
-  <title>Hello, world!</title>
+  <title>Edit Staff</title>
   <!-- Required meta tags -->
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport" />
@@ -32,19 +32,19 @@
   -->
       <div class="logo">
         <a href="http://www.creative-tim.com" class="simple-text logo-normal">
-          Creative Tim
+          Crossfit Gym
         </a>
       </div>
       <div class="sidebar-wrapper">
         <ul class="nav">
           <li class="nav-item   ">
-            <a class="nav-link" href="template.php">
+            <a class="nav-link" href="gymdeshboard.php">
               <i class="material-icons">dashboard</i>
               <p>Dashboard</p>
             </a>
           </li>
           <li class="nav-item ">
-            <a class="nav-link" href="clients.php">
+            <a class="nav-link" href="viewmembers.php">
               <i class="material-icons">person</i>
               <p>Members</p>
             </a>
@@ -67,6 +67,18 @@
               <p>Devices</p>
             </a>
           </li>
+          <li class="nav-item ">
+            <a class="nav-link" href="suppliments.php">
+              <i class="material-icons">reorder</i>
+              <p>Stocks</p>
+            </a>
+          </li>
+          <li class="nav-item ">
+            <a class="nav-link" href="viewsales.php">
+              <i class="material-icons">paid</i>
+              <p>Sales</p>
+            </a>
+          </li>
           <!-- your sidebar here -->
         </ul>
       </div>
@@ -76,7 +88,7 @@
       <nav class="navbar navbar-expand-lg navbar-transparent navbar-absolute fixed-top ">
         <div class="container-fluid">
           <div class="navbar-wrapper">
-            <a class="navbar-brand" href="javascript:void(0)">Deshboard/Staff </a>
+            <a class="navbar-brand" href="javascript:void(0)">Deshboard/Staff Edit </a>
           </div>
           <button class="navbar-toggler" type="button" data-toggle="collapse" aria-controls="navigation-index" aria-expanded="false" aria-label="Toggle navigation">
             <span class="sr-only">Toggle navigation</span>
@@ -87,7 +99,7 @@
           <div class="collapse navbar-collapse justify-content-end">
             <ul class="navbar-nav">
               <li class="nav-item">
-                <a class="nav-link" href="javascript:void(0)">
+                <a class="nav-link" href="Logout.php">
                   <i class="material-icons">logout</i>
                   <p class="d-lg-none d-md-block">
                     Logout
@@ -111,7 +123,7 @@
                      <h4 >Staff </h4>
                      </div>
                      <div class="col-xl-8 col-md-12">
-                     <a class="btn btn-success float-right" href="plans.php">View Staff</a>
+                     <a class="btn btn-success float-right" href="addstaff.php">View Staff</a>
                      </div>
                 </div>
                 </div>
@@ -122,7 +134,7 @@
                
               <div class="card-body">
                   <form id ="addstaff" action="staffeditsubmit.php" method="POST">
-                    
+                  <input type="hidden" id="id" name="id" class="from-control" value="<?php echo $data['id'];?>">
                     <div class="row">
                     <div class="col-lg-8 col-md-12">
                             <div class="form-group ">

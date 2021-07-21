@@ -13,11 +13,11 @@
         // delete data
         $pdo = Database::connect();
         $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-        $sql = "DELETE FROM table_nodemcu_rfidrc522_mysql  WHERE id = ?";
+        $sql = "DELETE FROM members  WHERE id = ?";
         $q = $pdo->prepare($sql);
         $q->execute(array($id));
         Database::disconnect();
-        header("Location: user data.php");
+        header("Location: viewmembers.php");
          
     }
 ?>
@@ -45,13 +45,13 @@
                 <div class="card" style=" display: flex; align-items: center;">
 			
 
-                    <form class="form-horizontal" action="user data delete page.php" method="post">
+                    <form class="form-horizontal" action="membersdelete.php" method="post">
                     <input type="hidden" name="id" value="<?php echo $id;?>"/>
                     <p class="alert alert-error">Are you sure to delete ?</p>
                     <div class="form-actions">
                     
                         <button type="submit" class="btn btn-danger">Yes</button>
-                        <a class="btn" href="user data.php">No</a>
+                        <a class="btn" href="viewmembers.php">No</a>
                     </div>
                     </form>
                 </div>

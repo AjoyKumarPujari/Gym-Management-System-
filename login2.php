@@ -22,7 +22,7 @@
 			}
 		}
 		if (isset($_SESSION["Email"])){
-			header("Location:template.php");
+			header("Location:gymdeshboard.php");
 		}
 	
 				

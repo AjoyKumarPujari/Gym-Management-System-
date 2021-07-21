@@ -2,7 +2,7 @@
 <html lang="en">
 
 <head>
-  <title>Hello, world!</title>
+  <title>Add Sales</title>
   <!-- Required meta tags -->
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport" />
@@ -25,20 +25,20 @@
       Tip 2: you can also add an image using data-image tag
   -->
       <div class="logo">
-        <a href="http://www.creative-tim.com" class="simple-text logo-normal">
-          Creative Tim
+        <a >
+          CrossFit Gym
         </a>
       </div>
       <div class="sidebar-wrapper">
         <ul class="nav">
           <li class="nav-item   ">
-            <a class="nav-link" href="template.php">
+            <a class="nav-link" href="gymdeshboard.php">
               <i class="material-icons">dashboard</i>
               <p>Dashboard</p>
             </a>
           </li>
           <li class="nav-item ">
-            <a class="nav-link" href="clients.php">
+            <a class="nav-link" href="viewmembers.php">
               <i class="material-icons">person</i>
               <p>Members</p>
             </a>
@@ -93,7 +93,7 @@
           <div class="collapse navbar-collapse justify-content-end">
             <ul class="navbar-nav">
               <li class="nav-item">
-                <a class="nav-link" href="javascript:void(0)">
+                <a class="nav-link" href="Logout.php">
                   <i class="material-icons">logout</i>
                   <p class="d-lg-none d-md-block">
                     Logout
@@ -114,10 +114,10 @@
                 <div class="card-header card-header-primary">
                 <div class="row">
                      <div class="col-xl-3 col-md-12">
-                     <h4 >Staff </h4>
+                     <h4 >Add Sales </h4>
                      </div>
                      <div class="col-xl-8 col-md-12">
-                     <a class="btn btn-success float-right" href="viewsales.php.php">View Sales</a>
+                     <a class="btn btn-success float-right" href="viewsales.php">View Sales</a>
                      </div>
                 </div>
                 </div>
@@ -127,37 +127,47 @@
               <div class="card">
                
               <div class="card-body">
-                  <form id ="addstaff" action="insertsales.php" method="POST">
-                    
+                  <form id ="addsale" action="insertsales.php" method="POST" onsubmit="return validation()" >
+                  
                     <div class="row">
                     
-                        <div class="col-lg-8 col-md-12">
+                        <div class="col-lg-6 col-md-12">
                             <div class="form-group ">
                                 <label for="item">Select Item</label>
                                 <select class="form-control " name ="item" id="item" onchange="myFunction()">
                                 <option class="text-dark">Select Item Name</option>
                                 <?php
                                     include 'connectDB.php';
-                                    $sql="SELECT  Itemname, sellingprice FROM stock";
+                                    $sql="SELECT  Itemname, sellingprice, quantity FROM stock";
+                                   
                                     $result=mysqli_query($conn,$sql);
                                     while($row=mysqli_fetch_array($result))
                                     {
                                   
-                                        echo '<option data-unitprice="'.$row[1].'"  value='.$row[0].'> '.$row[0].' </option>';
+                                        echo '<option data-unitprice="'.$row[1].'" data-aquantity="'.$row[2].'"  value="'.$row[0].'"> '.$row[0].' </option>';
                                     }
                                 ?>                            
                                 </select>
                                 
                             </div>
                         </div>  
-                    
-                         <div class="col-lg-4 col-md-12">
+                        <div class="col-lg-3 col-md-12">
                             <div class="form-group ">
-                            <label class="bmd-label-floating"> Quantity</label>
-                            <input type="text" id="quantity" name="quantity" class="form-control">
+                            <label class="label">Available Quantity</label>
+                            <input type="text" id="Aquantity" name="Aquantity" class="form-control" >
+                            
                             
                             </div>
                         </div>
+                         <div class="col-lg-3 col-md-12">
+                            <div class="form-group ">
+                            <label class="bmd-label-floating"> Quantity</label>
+                            <input type="text" id="quantity" name="quantity" class="form-control" onfocusout="total()">
+                            
+                            
+                            </div>
+                        </div>
+                        
                     </div>
                     
                     <div class="row">
@@ -166,24 +176,29 @@
                         <label for="item">Unit Price</label>
                           <div class="input-group mb-4 mr-sm-4">
                          
-                          <input type="text" id="unitprice" name="unitprice" class="form-control">
+                          <input type="text" id="unitprice" name="unitprice" class="form-control" >
                           
                           </div>
                         </div>
                       </div>
+                     
                       <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
                                 <script>
                                   function myFunction(){
-                                    var index = document.getElementByName("item").selectedIndex;
-                                    var unitprice = document.getElementById("item").options[index].getAttribute("data-unitprice");                                   
-                                    document.getElementsByName("unitprice")[1].value = unitprice;                                  
+                                   
+                                    var index = document.getElementById("item").selectedIndex;
+                                    var unitprice = document.getElementById("item").options[index].getAttribute("data-unitprice");   
+                                    var Aquantity = document.getElementById("item").options[index].getAttribute("data-aquantity");                                   
+                                    document.getElementsByName("unitprice")[0].value = unitprice; 
+                                    document.getElementsByName("Aquantity")[0].value = Aquantity; 
+                                                                   
                                     }
                                 </script>
                       <div class="col-lg-6 col-md-12">
                         <div class="form-group">
                           <label class="bmd-label-floating">Total Amount </label>
                           <div class="input-group mb-4 mr-sm-4">
-                          <input type="text" id="totalamount" name="totalamount" class="form-control" onclick="total()">
+                          <input type="text" id="totalamount" name="totalamount" class="form-control">
                          
                           </div>
                         </div>
@@ -229,6 +244,28 @@
                     
                     
                   </form>
+                  <script>
+                    function validation()
+                    {
+                      var phone = document.forms['addsale']['phone'];
+                      
+                      
+                      if(isNaN(phone.value) || phone.value.length!=10)
+                      {
+                        alert('Invalid Phone Number');
+                        return false;
+                      }
+                      else{
+                        include('connectDB.php');
+                          $query=mysqli_query("select quantity from `stock` where item='$item'");
+                        $data=mysqli_fetch_array($conn,$query);
+                          $sql1="UPDATE stock set quantity = quantity - '$quantity' WHERE item = '$item'";
+                          $p= $pdo->prepare($sql1);
+                          $p->execute();
+                      }
+                      return true;
+                    }
+                  </script>
                 </div>
               </div>
             </div>
@@ -242,35 +279,9 @@
         </div>
       </div>
       <script type="text/javascript">
-            var mytextbox = document.getElementById('unitprice');
-            var mydropdown = document.getElementById('item');
-
-            mydropdown.onchange = function(){
-                mytextbox.value = mytextbox.value  + this.value; //to appened
-                //mytextbox.innerHTML = this.value;
-            }
+            
         </script>
-      <footer class="footer">
-        <div class="container-fluid">
-          <nav class="float-left">
-            <ul>
-              <li>
-                <a href="https://www.creative-tim.com">
-                  Creative Tim
-                </a>
-              </li>
-            </ul>
-          </nav>
-          <div class="copyright float-right">
-            &copy;
-            <script>
-              document.write(new Date().getFullYear())
-            </script>, made with <i class="material-icons">favorite</i> by
-            <a href="https://www.creative-tim.com" target="_blank">Creative Tim</a> for a better web.
-          </div>
-          <!-- your footer here -->
-        </div>
-      </footer>
+     
     </div>
   </div>
   <!--   Core JS Files   -->
@@ -282,7 +293,7 @@
   <!-- Place this tag in your head or just before your close body tag. -->
   <script async defer src="https://buttons.github.io/buttons.js"></script>
   <!--  Google Maps Plugin    -->
-  <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_KEY_HERE"></script>
+  
   <!-- Chartist JS -->
   <script src="./assets/js/plugins/chartist.min.js"></script>
   <!--  Notifications Plugin    -->
